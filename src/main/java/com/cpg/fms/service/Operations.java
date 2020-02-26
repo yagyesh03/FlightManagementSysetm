@@ -353,12 +353,26 @@ public class Operations implements OperationsInterface{
 		} 
 		catch(NullPointerException | IOException e) {
 			System.out.println("INVALID USER ID or PASSWORD");
+			System.out.println("WANT TO CHANGE THE PASSWORD ? [ Y / N ]");
+			String check = null;
+			if(check.equals("Y")) {
+				changePass(user,data);
+			}
 		}
 		
 		return null;
 	}
 
-	
+	public void changePass(User user, Database data) {
+		System.out.println("Enter New Password:");
+		String pass = null;
+		try {
+			pass = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		data.userMap.get(user.getUserId()).setPassword(pass);
+	}
 	
 	//ADMIN:
 	public void adminOperations(User user, Database data) throws IOException {
