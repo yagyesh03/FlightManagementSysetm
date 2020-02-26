@@ -180,7 +180,7 @@ public class Operations implements OperationsInterface{
 			
 			try {
 				signType =  br.readLine();
-				if(signType.equals("Y"));
+				if(signType.equals("Y"))
 				return true;
 			} catch (IOException e) {
 				e.getMessage();
@@ -329,6 +329,7 @@ public class Operations implements OperationsInterface{
 		System.out.println("\n\n\t**** SIGN IN ****");
 		Long userId = (long) 0;
 		String password;
+		User user = new User();
 		System.out.println("\n\tEnter UserID:");
 		try
 		{
@@ -344,7 +345,7 @@ public class Operations implements OperationsInterface{
 			}
 			else 
 			{
-				User user = data.userMap.get(userId);
+				user = data.userMap.get(userId);
 				System.out.println("\n\tSIGN IN SUCCESSFUL.\n\n");
 				System.out.println("\n\tWELCOME "+user.getUserName());
 				return user;
@@ -355,6 +356,12 @@ public class Operations implements OperationsInterface{
 			System.out.println("INVALID USER ID or PASSWORD");
 			System.out.println("WANT TO CHANGE THE PASSWORD ? [ Y / N ]");
 			String check = null;
+			try {
+				check = br.readLine();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			if(check.equals("Y")) {
 				changePass(user,data);
 			}
@@ -462,6 +469,18 @@ public class Operations implements OperationsInterface{
 					break;
 				
 				case 9:
+					System.out.print("SIGNING OFF");
+				try {
+					Thread.sleep(500);
+					System.out.print(".......");
+					Thread.sleep(500);
+					System.out.print(".......");
+					Thread.sleep(500);
+					System.out.print(".......");
+				} catch (InterruptedException e1) {
+					
+					e1.printStackTrace();
+				}
 					return;
 					
 				default:

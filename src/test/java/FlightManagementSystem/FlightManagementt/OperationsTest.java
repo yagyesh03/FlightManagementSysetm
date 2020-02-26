@@ -20,7 +20,7 @@ public class OperationsTest extends TestCase {
 	@Test
 	public void testPhone() 
 	{
-		boolean flag = oper.validPhoneNum("7976648278");
+		boolean flag = oper.validPhoneNum("797664827");
 		assertTrue(flag);
 	}
 }
