@@ -470,17 +470,16 @@ public class Operations implements OperationsInterface{
 				
 				case 9:
 					System.out.print("SIGNING OFF");
-				try {
-					Thread.sleep(500);
-					System.out.print(".......");
-					Thread.sleep(500);
-					System.out.print(".......");
-					Thread.sleep(500);
-					System.out.print(".......");
-				} catch (InterruptedException e1) {
-					
-					e1.printStackTrace();
-				}
+					try {
+						Thread.sleep(500);
+						System.out.print(".......");
+						Thread.sleep(500);
+						System.out.print(".......");
+						Thread.sleep(500);
+						System.out.print(".......");
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
 					return;
 					
 				default:
@@ -508,15 +507,34 @@ public class Operations implements OperationsInterface{
 		
 		try 
 		{
-		
-			System.out.println("\n\tEnter Departure Date and Time: [ dd-MM-yyyy hh:mm:ss ] ");
-			Date temp = dateFormat.parse(br.readLine());
-			schedule.setDepartureTime(temp);
-
-
-			System.out.println("\n\tEnter Arrival Date and Time: [ dd-MM-yyyy hh:mm:ss ] ");
-			temp = dateFormat.parse(br.readLine());
-			schedule.setArrivalTime(temp);
+			Date date1 = null;
+			Date date2 = null;
+			while(true) 
+			{
+				System.out.println("\n\tEnter Departure Date and Time: [ dd-MM-yyyy hh:mm:ss ] ");
+				date1 = dateFormat.parse(br.readLine());
+				
+	
+				System.out.println("\n\tEnter Arrival Date and Time: [ dd-MM-yyyy hh:mm:ss ] ");
+				date2 = dateFormat.parse(br.readLine());
+				
+			
+				
+				if(date1.compareTo(date2) <= 0)
+					break;
+				else {
+					try {
+						throw new UserException("Departure date can not be after arrival date.");
+					}
+					catch(UserException e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				
+			}
+			
+			schedule.setDepartureTime(date1);
+			schedule.setArrivalTime(date2);
 			
 			System.out.println("\n\tFollowing are the Airports:\n");
 			data.airportMap.entrySet().stream().forEach(i -> System.out.println(i.getKey()+ " "+ i.getValue().getAirportName()));
@@ -535,9 +553,8 @@ public class Operations implements OperationsInterface{
 			
 			System.out.println("\n\tEnter Number of seats.");
 			int seats = Integer.parseInt(br.readLine());
-			System.out.println(temp);
-			System.out.println(tempAirport);
-			System.out.println(schedule);
+
+
 			newFlight.setAvailableSeats(seats);
 			
 			newFlight.setFlight(flight);
@@ -545,7 +562,6 @@ public class Operations implements OperationsInterface{
 			newFlight.setSchedule(schedule);
 
 			
-			System.out.println("CHALA4");
 			return newFlight;
 		}
 		catch(ParseException | IOException e) {
@@ -719,7 +735,17 @@ public class Operations implements OperationsInterface{
 				
 				default:
 					System.out.println("SIGNING OFF.");
-					return;
+					
+					try {
+						Thread.sleep(500);
+						System.out.print(".......");
+						Thread.sleep(500);
+						System.out.print(".......");
+						Thread.sleep(500);
+						System.out.print(".......");
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}return;
 			}	
 		}
 	}
