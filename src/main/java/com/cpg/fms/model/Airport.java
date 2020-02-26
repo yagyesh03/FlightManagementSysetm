@@ -45,7 +45,5 @@ public class Airport {
 				+ "\t| Airport Code = "+airportCode 
 				+ " ]\n\n";
 	}
-	
-	
-	
+		
 }

@@ -10,20 +10,21 @@ public class User {
 	private String password;
 	private String eMail;
 	private long userId;
-	private Long phoneNumber;
-	HashMap<Long, Booking> bookings = new HashMap<Long, Booking>();
+	private long phoneNumber;
+	HashMap<Long, Booking> bookings = new HashMap<>();
 	
 	
 	public User() {
 		
 	}
 	
-public User(String userType, String userName, String password, long userId) {
+public User(String userType, String userName, String password, long userId, long phoneNumber) {
 	
 		this.userType = userType;
 		this.userName = userName;
 		this.password = password;
 		this.userId = userId;
+		this.phoneNumber = phoneNumber;
 	}
 
 //	Getters and Setters:

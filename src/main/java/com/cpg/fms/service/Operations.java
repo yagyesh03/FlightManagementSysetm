@@ -32,13 +32,15 @@ public class Operations implements OperationsInterface{
 		String cont = "Y";
 		while(cont.equals("Y"))
 		{
+			
 			int choice = 0;
-			String temp;
+			String temp = null;
+			
 			System.out.println("\n\tYOU CAN UPDATE FOLLOWING DETAILS:"
-					+ " \n\t 1. MAIL ADDRESS: "+user.geteMail()
-					+ ".\n\t 2. PHONE NUMBER: "+user.getPhoneNumber()
-					+ ".\n\t 3. USER NAME: "+user.getUserName()
-					+ ".\n\t 4. PASSWORD.");
+							 + " \n\t 1. MAIL ADDRESS: "+user.geteMail()
+							 + ".\n\t 2. PHONE NUMBER: "+user.getPhoneNumber()
+							 + ".\n\t 3. USER NAME: "+user.getUserName()
+							 + ".\n\t 4. PASSWORD.");
 			try {
 				choice = Integer.parseInt(br.readLine());
 				switch(choice) 
@@ -245,7 +247,6 @@ public class Operations implements OperationsInterface{
 				{
 					if(data.userMap.get(Long.parseLong(temp)) != null) 
 						throw new UserException("EXCEPTION: USER WITH SAME ID ALREADY EXIST");
-//					System.out.println(Pattern.matches("[0-9]{3}", temp));
 					if(!Pattern.matches("[0-9]{3}", temp)) 
 					{
 						throw new UserException("ID MUST BE OF 3 DIGITS.");
@@ -354,12 +355,11 @@ public class Operations implements OperationsInterface{
 		} 
 		catch(NullPointerException | IOException e) {
 			System.out.println("INVALID USER ID or PASSWORD");
-			System.out.println("WANT TO CHANGE THE PASSWORD ? [ Y / N ]");
-			String check = null;
+			System.out.println("\n\nWANT TO CHANGE THE PASSWORD ? [ Y / N ]");
+			String check = "N";
 			try {
 				check = br.readLine();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			if(check.equals("Y")) {
@@ -370,13 +370,23 @@ public class Operations implements OperationsInterface{
 		return null;
 	}
 
-	public void changePass(User user, Database data) {
-		System.out.println("Enter New Password:");
+	public void changePass(User user, Database data) 
+	{
 		String pass = null;
-		try {
-			pass = br.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
+		while(true)
+		{
+			System.out.println("\n\tEnter New Password:");
+			try {
+				pass = br.readLine();
+				if(pass.length() < 5)
+					throw new UserException("\n\tEXCEPTION: PLEASE ENTER STRONG PASSWORD.");	
+				else 
+					break;	
+			} 
+			catch (IOException | UserException e) 
+			{
+				System.out.println(e.getMessage());
+			}
 		}
 		data.userMap.get(user.getUserId()).setPassword(pass);
 	}
@@ -549,11 +559,22 @@ public class Operations implements OperationsInterface{
 			tempAirport = data.airportMap.get(br.readLine());
 			schedule.setDestinationAirport(tempAirport);
 			
-			
-			
-			System.out.println("\n\tEnter Number of seats.");
-			int seats = Integer.parseInt(br.readLine());
-
+			int seats = 0;
+			while(true)
+			{
+				System.out.println("\n\tEnter Number of seats.");
+				seats= Integer.parseInt(br.readLine());
+				if(seats > flight.getSeatCapacity()) {
+					try {
+						throw new UserException("EXCEPTION: NUMBER OF SEATS ECXCEEDING AVAILABLE SEATS.");
+					}
+					catch(UserException e) {
+						System.out.println(e.getMessage());
+					}
+				}
+				else
+					break;
+			}
 
 			newFlight.setAvailableSeats(seats);
 			

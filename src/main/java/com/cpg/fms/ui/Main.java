@@ -28,7 +28,7 @@ public class Main
 //MAIN:
 	public static void main(String[] args) 
 	{
-		System.out.println("\n\t*** !! 'Welcome Note' !! ***\n\n");
+		System.out.println("\n\t*** !! AIM HIGH, FLIGH HIGH !! ***\n\n");
 		Operations operation  = new Operations();
 		Main services = new Main();
 		services.setDefaultData();
@@ -47,7 +47,7 @@ public class Main
 			System.out.println("\t***************************");
 			System.out.println("\t*                         *");
 			System.out.println("\t*                         *");
-			System.out.println("\t*       127.0.0.1         *");
+			System.out.println("\t*       HOME PAGE         *");
 			System.out.println("\t*                         *");
 			System.out.println("\t*                         *");
 			System.out.println("\t***************************");
@@ -101,11 +101,12 @@ public class Main
 		{
 			
 			//Creating demo/default ADMIN:
-			User testAdmin = new User("ADMIN", "YAGYESH", "123", 123);
+			
+			User testAdmin = new User("ADMIN", "YAGYESH", "123", 123, Long.parseLong("7976648278"));
 			data.userMap.put(testAdmin.getUserId(), testAdmin);
 			
 			//Creating demo/default CUSTOMER:
-			User tempCustomer = new User("CUSTOMER", "JOHN", "124", 124);
+			User tempCustomer = new User("CUSTOMER", "JOHN", "124", 124, Long.parseLong("9462346459"));
 			data.userMap.put(tempCustomer.getUserId(), tempCustomer);
 			
 			//Creating Airports:
